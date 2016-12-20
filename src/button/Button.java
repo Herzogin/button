@@ -4,21 +4,25 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 
 import lampButtonServer.ButtonInterface;
-import lampButtonServer.Server;
+import lampButtonServer.ServerInterface;
 
-public class Button implements ButtonInterface {
+public class Button extends java.rmi.server.UnicastRemoteObject implements ButtonInterface {
+
+	protected Button() throws RemoteException {
+		super();
+	}
 
 	@Override
 	public void press() throws RemoteException {
 		try {
-			Server s = (Server) Naming.lookup("rmi://localhost:1099/Server"); //Proxy-Object
+			ServerInterface s = (ServerInterface) Naming.lookup("rmi://localhost:1099/Server"); //Proxy-Object
 			s.sendMessage("press");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws RemoteException {
 		Button b = new Button();
 		try {
 			b.press();
