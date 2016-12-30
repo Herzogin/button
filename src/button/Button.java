@@ -2,12 +2,13 @@ package button;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.util.Scanner;
 
-import lampButtonServer.ButtonInterface;
-import lampButtonServer.ServerInterface;
+import buttonLampInterfaces.ServerInterface;
 
-public class Button extends java.rmi.server.UnicastRemoteObject implements ButtonInterface {
-
+public class Button extends java.rmi.server.UnicastRemoteObject implements buttonLampInterfaces.ButtonInterface {
+Scanner scanner = new Scanner(System.in);
+boolean insert = true;
 	protected Button() throws RemoteException {
 		super();
 	}
@@ -15,8 +16,30 @@ public class Button extends java.rmi.server.UnicastRemoteObject implements Butto
 	@Override
 	public void press() throws RemoteException {
 		try {
-			ServerInterface s = (ServerInterface) Naming.lookup("rmi://localhost:1099/Server"); //Proxy-Object
-			s.sendMessage("press");
+			buttonLampInterfaces.ServerInterface s = (buttonLampInterfaces.ServerInterface) Naming.lookup("rmi://localhost:1000/Server"); //Proxy-Object
+			
+			while(insert){
+				System.out.println("typ 'press' to switch lamp and 'exit' to stop");
+				String input = scanner.nextLine();
+				input = input.toLowerCase();
+				
+				switch (input) {
+				case "press":
+					s.sendMessage(input);
+					break;
+
+				case "exit":
+					scanner.close();
+					System.out.println("Insert closed!");
+					insert = false;
+					break;
+					
+				default:
+					System.out.println("wrong insert try again!");
+					break;
+				}
+			}
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
