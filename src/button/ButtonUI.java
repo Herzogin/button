@@ -24,11 +24,9 @@ Button btn;
 	    JFrame f = new JFrame( "Button" );
 	    f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 	    f.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-	    //f.add( new JLabel( String.format( "%tT", new Date() ) ) );
-	     p = new JPanel();
-	     b = new JButton("Klick me!");
-	     b.addActionListener(this);
-	     //p.setLayout(new BorderLayout());
+	    p = new JPanel();
+	    b = new JButton("Klick me!");
+	    b.addActionListener(this);
 	    p.setBackground(Color.GRAY);
 	    p.add(b, BorderLayout.CENTER);
 	    f.add(p);
@@ -44,7 +42,6 @@ Button btn;
 		try {
 			btn.press();
 		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
