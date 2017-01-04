@@ -24,7 +24,7 @@ Button btn;
 		
 		// TODO: Move the registry binding to another place?
 		btn = new Button();
-		Registry registry = LocateRegistry.getRegistry();
+		Registry registry = LocateRegistry.getRegistry(3000);
 		registry.bind("button", btn);
 		
 	    JFrame f = new JFrame( "Button" );
