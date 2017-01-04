@@ -7,18 +7,22 @@ import java.util.Scanner;
 import buttonLampInterfaces.ServerInterface;
 
 public class Button extends java.rmi.server.UnicastRemoteObject implements buttonLampInterfaces.ButtonInterface {
-Scanner scanner = new Scanner(System.in);
-boolean insert = true;
+	Scanner scanner = new Scanner(System.in);
+	boolean insert = true;
+	
+
+
 	protected Button() throws RemoteException {
 		super();
+		
 	}
 
 	@Override
 	public void press() throws RemoteException {
 		try {
-			buttonLampInterfaces.ServerInterface s = (buttonLampInterfaces.ServerInterface) Naming.lookup("rmi://localhost:3000/Server"); //Proxy-Object
+			buttonLampInterfaces.ServerInterface s = (buttonLampInterfaces.ServerInterface) Naming.lookup("rmi://141.45.215.117:3000/Server"); //Proxy-Object
 			
-			while(insert){
+			/*while(insert){
 				System.out.println("typ 'press' to switch lamp and 'exit' to stop");
 				String input = scanner.nextLine();
 				input = input.toLowerCase();
@@ -38,14 +42,18 @@ boolean insert = true;
 					System.out.println("wrong insert try again!");
 					break;
 				}
-			}
+			}*/
+			
+			s.sendMessage("press");
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
+	
+	
 
-	public static void main(String[] args) throws RemoteException {
+	/*public static void main(String[] args) throws RemoteException {
 		Button b = new Button();
 		try {
 			b.press();
@@ -53,5 +61,5 @@ boolean insert = true;
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
