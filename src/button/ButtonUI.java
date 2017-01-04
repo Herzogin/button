@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,9 +20,12 @@ JPanel p;
 JButton b;
 Button btn;
 	
-	public ButtonUI() throws RemoteException{
+	public ButtonUI() throws RemoteException, AlreadyBoundException{
 		
+		// TODO: Move the registry binding to another place?
 		btn = new Button();
+		Registry registry = LocateRegistry.getRegistry(3000);
+		registry.bind("button", btn);
 		
 	    JFrame f = new JFrame( "Button" );
 	    f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -32,8 +38,6 @@ Button btn;
 	    f.add(p);
 	    
 	    f.setVisible( true );
-	    
-	    
 	}
 	
 	@Override
@@ -47,7 +51,7 @@ Button btn;
 		
 	}
 	
-	public static void main(String[] args) throws RemoteException{
+	public static void main(String[] args) throws RemoteException, AlreadyBoundException {
 		new ButtonUI();
 		
 	}
