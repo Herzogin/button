@@ -16,7 +16,7 @@ boolean insert = true;
 	@Override
 	public void press() throws RemoteException {
 		try {
-			buttonLampInterfaces.ServerInterface s = (buttonLampInterfaces.ServerInterface) Naming.lookup("rmi://localhost:1000/Server"); //Proxy-Object
+			buttonLampInterfaces.ServerInterface s = (buttonLampInterfaces.ServerInterface) Naming.lookup("rmi://localhost:3000/Server"); //Proxy-Object
 			
 			while(insert){
 				System.out.println("typ 'press' to switch lamp and 'exit' to stop");
