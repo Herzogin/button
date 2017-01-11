@@ -9,6 +9,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,7 +27,9 @@ Button btn;
 		// TODO: Move the registry binding to another place?
 		btn = new Button();
 		Registry registry = LocateRegistry.getRegistry(3000);
-		registry.bind("button", btn);
+		
+		// TODO: bind to button/hostname/uID, we use currentTime as uID for developing locally
+		registry.bind("button-" + System.currentTimeMillis(), btn);
 		
 	    JFrame f = new JFrame( "Button" );
 	    f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
