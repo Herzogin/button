@@ -2,6 +2,7 @@ package button;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.AlreadyBoundException;
@@ -29,14 +30,16 @@ Button btn;
 		
 	    JFrame f = new JFrame( "Button" );
 	    f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-	    f.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-	    p = new JPanel();
-	    b = new JButton("Klick me!");
+	    //f.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+	    f.setSize(600, 600);
+	    f.setLayout(new BorderLayout());
+	    p = new JPanel(new BorderLayout());
+	    GradientCircularButton b = new GradientCircularButton("Click me!!!");
+//		b.setPreferredSize(new Dimension(450, 450));
 	    b.addActionListener(this);
+	    p.add(b,BorderLayout.CENTER);
 	    p.setBackground(Color.GRAY);
-	    p.add(b, BorderLayout.CENTER);
-	    f.add(p);
-	    
+	    f.add(p,BorderLayout.CENTER);
 	    f.setVisible( true );
 	}
 	
