@@ -25,10 +25,11 @@ Button btn;
 	public ButtonUI() throws RemoteException, AlreadyBoundException{
 		
 		// TODO: Move the registry binding to another place?
-		btn = new Button();
+		btn = new Button("even");
+		//btn = new Button("odd");
 		Registry registry = LocateRegistry.getRegistry(3000);
 		
-		// TODO: bind to button/hostname/uID, we use currentTime as uID for developing locally
+		// TODO: bind to button/hostname/uuID, we use currentTime as uuID for developing locally
 		registry.bind("button-" + System.currentTimeMillis(), btn);
 		
 	    JFrame f = new JFrame( "Button" );

@@ -8,9 +8,11 @@ import buttonLampInterfaces.ControllerInterface;
 
 public class Button extends java.rmi.server.UnicastRemoteObject implements buttonLampInterfaces.ButtonInterface {
 	private ArrayList<ControllerInterface> observers;
+	String version;
 	
-	protected Button() throws RemoteException {
+	protected Button(String version) throws RemoteException {
 		super();
+		this.version = version;
 		observers = new ArrayList<ControllerInterface>();
 	}
 
@@ -25,7 +27,7 @@ public class Button extends java.rmi.server.UnicastRemoteObject implements butto
 	
 	public void notifyObservers() throws RemoteException {
 		for(ControllerInterface observer : observers) {  
-			observer.update();
+			observer.update(this.version);
 		}
 	}
 
