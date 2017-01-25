@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -22,15 +24,12 @@ JPanel p;
 JButton b;
 Button btn;
 	
-	public ButtonUI() throws RemoteException, AlreadyBoundException{
+	public ButtonUI() throws RemoteException, AlreadyBoundException, UnknownHostException{
 		
 		// TODO: Move the registry binding to another place?
-		btn = new Button("even");
+		btn = new Button("even",InetAddress.getLocalHost().getHostName());
 		//btn = new Button("odd");
-		Registry registry = LocateRegistry.getRegistry(3000);
 		
-		// TODO: bind to button/hostname/uuID, we use currentTime as uuID for developing locally
-		registry.bind("button-" + System.currentTimeMillis(), btn);
 		
 	    JFrame f = new JFrame( "Button" );
 	    f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -58,7 +57,7 @@ Button btn;
 		
 	}
 	
-	public static void main(String[] args) throws RemoteException, AlreadyBoundException {
+	public static void main(String[] args) throws RemoteException, AlreadyBoundException, UnknownHostException {
 		new ButtonUI();
 		
 	}
