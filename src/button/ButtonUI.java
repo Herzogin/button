@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -22,7 +21,7 @@ Button btn;
 	
 	public ButtonUI() throws RemoteException, AlreadyBoundException, UnknownHostException{
 		
-		btn = new Button("even",InetAddress.getLocalHost().getHostName());
+		btn = new Button();
 		
 	    JFrame f = new JFrame( "Button" );
 	    f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
