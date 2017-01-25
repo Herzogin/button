@@ -1,17 +1,27 @@
 package button;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
 import buttonLampInterfaces.ControllerInterface;
 
 public class Button extends java.rmi.server.UnicastRemoteObject implements buttonLampInterfaces.ButtonInterface {
 	private ArrayList<ControllerInterface> observers;
+	String name;
 	
-	protected Button() throws RemoteException {
+	protected Button() throws RemoteException, UnknownHostException, AlreadyBoundException {
 		super();
+		this.name = "button" + "/" + InetAddress.getLocalHost().getHostName() + "/" + System.currentTimeMillis();
 		observers = new ArrayList<ControllerInterface>();
+		
+		Registry registry = LocateRegistry.getRegistry(3000);
+		registry.bind(this.name, this);
 	}
 
 	@Override
@@ -25,7 +35,7 @@ public class Button extends java.rmi.server.UnicastRemoteObject implements butto
 	
 	public void notifyObservers() throws RemoteException {
 		for(ControllerInterface observer : observers) {  
-			observer.update();
+			observer.update(this.name);
 		}
 	}
 
