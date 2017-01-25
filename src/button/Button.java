@@ -13,15 +13,15 @@ import buttonLampInterfaces.ControllerInterface;
 
 public class Button extends java.rmi.server.UnicastRemoteObject implements buttonLampInterfaces.ButtonInterface {
 	private ArrayList<ControllerInterface> observers;
-	String version;
+	String name;
 	
-	protected Button(String version, String hostname) throws RemoteException, UnknownHostException, AlreadyBoundException {
+	protected Button() throws RemoteException, UnknownHostException, AlreadyBoundException {
 		super();
-		this.version = version;
+		this.name = "button" + "/" + InetAddress.getLocalHost().getHostName() + "/" + System.currentTimeMillis();
 		observers = new ArrayList<ControllerInterface>();
 		
 		Registry registry = LocateRegistry.getRegistry(3000);
-		registry.bind("button"+"/"+hostname+"/"+System.currentTimeMillis(), this);
+		registry.bind(this.name, this);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class Button extends java.rmi.server.UnicastRemoteObject implements butto
 	
 	public void notifyObservers() throws RemoteException {
 		for(ControllerInterface observer : observers) {  
-			observer.update(this.version);
+			observer.update(this.name);
 		}
 	}
 
