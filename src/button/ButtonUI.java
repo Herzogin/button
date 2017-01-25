@@ -2,16 +2,12 @@ package button;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,10 +22,7 @@ Button btn;
 	
 	public ButtonUI() throws RemoteException, AlreadyBoundException, UnknownHostException{
 		
-		// TODO: Move the registry binding to another place?
 		btn = new Button("even",InetAddress.getLocalHost().getHostName());
-		//btn = new Button("odd");
-		
 		
 	    JFrame f = new JFrame( "Button" );
 	    f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
