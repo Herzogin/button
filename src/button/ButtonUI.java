@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import javax.swing.JButton;
@@ -19,7 +21,7 @@ JPanel p;
 JButton b;
 Button btn;
 	
-	public ButtonUI() throws RemoteException, AlreadyBoundException, UnknownHostException{
+	public ButtonUI() throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException{
 		
 		btn = new Button();
 		
@@ -49,7 +51,7 @@ Button btn;
 		
 	}
 	
-	public static void main(String[] args) throws RemoteException, AlreadyBoundException, UnknownHostException {
+	public static void main(String[] args) throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException {
 		new ButtonUI();
 		
 	}
