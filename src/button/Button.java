@@ -3,15 +3,15 @@ package button;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
-import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
-import buttonLampInterfaces.ControllerInterface;
+import org.htw.fiw.vs.team1.ButtonInterface;
+import org.htw.fiw.vs.team1.ControllerInterface;
 
-public class Button extends java.rmi.server.UnicastRemoteObject implements buttonLampInterfaces.ButtonInterface {
+public class Button extends java.rmi.server.UnicastRemoteObject implements ButtonInterface {
 	private ArrayList<ControllerInterface> observers;
 	String name;
 	
