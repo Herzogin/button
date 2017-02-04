@@ -45,7 +45,7 @@ Button btn;
 		
 		try {
 			btn.press();
-		} catch (RemoteException e1) {
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		

@@ -29,7 +29,7 @@ public class Button extends java.rmi.server.UnicastRemoteObject implements Butto
 	}
 
 	@Override
-	public void press() throws RemoteException {
+	public void press() {
 		try {
 			notifyObservers();	
 		} catch (Exception e) {
@@ -37,9 +37,13 @@ public class Button extends java.rmi.server.UnicastRemoteObject implements Butto
 		}
 	}
 	
-	public void notifyObservers() throws RemoteException {
+	public void notifyObservers() {
 		for(ControllerInterface observer : observers) {  
-			observer.update(this.name);
+			try {
+				observer.update(this.name);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
