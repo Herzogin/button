@@ -31,7 +31,7 @@ Button btn;
 	    f.setSize(600, 600);
 	    f.setLayout(new BorderLayout());
 	    p = new JPanel(new BorderLayout());
-	    GradientCircularButton b = new GradientCircularButton("Click me!!!");
+	    GradientCircularButton b = new GradientCircularButton(btn.name.substring(btn.name.length() - 2, btn.name.length()));
 //		b.setPreferredSize(new Dimension(450, 450));
 	    b.addActionListener(this);
 	    p.add(b,BorderLayout.CENTER);
