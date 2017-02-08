@@ -21,16 +21,17 @@ public class Button extends java.rmi.server.UnicastRemoteObject implements Butto
 	
 	protected Button() throws RemoteException, UnknownHostException, AlreadyBoundException, MalformedURLException, NotBoundException {
 		super();
-		this.name = "button" + "/" + InetAddress.getLocalHost().getHostName() + "/" + System.currentTimeMillis();
+		this.name = "button" + "-" + InetAddress.getLocalHost().getHostName() + "-" + System.currentTimeMillis();
 		observers = new ArrayList<ControllerInterface>();
 		
-		IBinder registry = (IBinder) Naming.lookup("rmi://141.45.209.97/binder");
+		IBinder registry = (IBinder) Naming.lookup("rmi://141.45.213.212/binder");
 		registry.bind(this.name, this);
 	}
 
 	@Override
 	public void press() {
 		try {
+			System.out.println("button pressed");
 			notifyObservers();	
 		} catch (Exception e) {
 			System.out.println(e);
