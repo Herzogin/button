@@ -52,8 +52,18 @@ Button btn;
 	}
 	
 	public static void main(String[] args) throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException {
-		new ButtonUI();
+		ButtonUI b = new ButtonUI();
 		
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run() {
+				try {
+					b.btn.registry.unbind(b.btn.name);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	

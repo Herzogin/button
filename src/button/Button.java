@@ -17,6 +17,7 @@ import org.htw.fiw.vs.team1.ControllerInterface;
 
 public class Button extends java.rmi.server.UnicastRemoteObject implements ButtonInterface {
 	private ArrayList<ControllerInterface> observers;
+	IBinder registry;
 	String name;
 	
 	protected Button() throws RemoteException, UnknownHostException, AlreadyBoundException, MalformedURLException, NotBoundException {
@@ -24,7 +25,7 @@ public class Button extends java.rmi.server.UnicastRemoteObject implements Butto
 		this.name = "button" + "-" + InetAddress.getLocalHost().getHostName() + "-" + System.currentTimeMillis();
 		observers = new ArrayList<ControllerInterface>();
 		
-		IBinder registry = (IBinder) Naming.lookup("rmi://141.45.213.212/binder");
+		registry = (IBinder) Naming.lookup("rmi://localhost/binder");
 		registry.bind(this.name, this);
 	}
 
