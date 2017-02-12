@@ -20,12 +20,12 @@ public class Button extends java.rmi.server.UnicastRemoteObject implements Butto
 	IBinder registry;
 	String name;
 	
-	protected Button() throws RemoteException, UnknownHostException, AlreadyBoundException, MalformedURLException, NotBoundException {
+	protected Button(String ip) throws RemoteException, UnknownHostException, AlreadyBoundException, MalformedURLException, NotBoundException {
 		super();
 		this.name = "button" + "-" + InetAddress.getLocalHost().getHostName() + "-" + System.currentTimeMillis();
 		observers = new ArrayList<ControllerInterface>();
 		
-		registry = (IBinder) Naming.lookup("rmi://localhost/binder");
+		registry = (IBinder) Naming.lookup("rmi://"+ip+"/binder");
 		registry.bind(this.name, this);
 	}
 
