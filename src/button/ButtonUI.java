@@ -21,9 +21,9 @@ JPanel p;
 JButton b;
 Button btn;
 	
-	public ButtonUI() throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException{
+	public ButtonUI(String ip) throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException{
 		
-		btn = new Button();
+		btn = new Button(ip);
 		
 	    JFrame f = new JFrame( "Button" );
 	    f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -52,7 +52,15 @@ Button btn;
 	}
 	
 	public static void main(String[] args) throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException {
-		ButtonUI b = new ButtonUI();
+		
+		//IP wird beim Starten der JAR-File übergeben:
+				String ip = args[0];
+						
+				//wenn man es aus Eclipse heraus laufen lassen möchte bitte stattdessen:
+				//String ip = "141.45.203.230";
+		
+		
+		ButtonUI b = new ButtonUI(ip);
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
